@@ -1,0 +1,72 @@
+.assessment-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card--sage {
+  background: var(--sage-soft);
+}
+.card--lavender {
+  background: var(--lavender-soft);
+}
+
+.card__eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+.card--sage .card__eyebrow {
+  color: var(--sage-deep);
+}
+.card--lavender .card__eyebrow {
+  color: var(--lavender-deep);
+}
+
+.card__text {
+  margin-top: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.card__meta {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 1.5rem 0 2rem;
+}
+.card__meta li {
+  font-size: 0.875rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.card .btn {
+  margin-top: auto;
+}
+
+@media (min-width: 800px) {
+  .assessment-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

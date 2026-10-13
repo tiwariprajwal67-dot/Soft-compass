@@ -1,0 +1,44 @@
+.how {
+  background: var(--blush-soft);
+  border-block: 1px solid var(--line);
+}
+
+.how__list {
+  list-style: none;
+  padding: 0;
+  margin: 2.5rem 0 0;
+  display: grid;
+  gap: 2.25rem;
+}
+
+.how__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 1.1rem;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--blush-deep);
+}
+
+.how__step h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.how__step p {
+  color: var(--ink-soft);
+  max-width: 34ch;
+}
+
+@media (min-width: 800px) {
+  .how__list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+}

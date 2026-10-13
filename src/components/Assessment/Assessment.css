@@ -1,0 +1,233 @@
+/* Shared styles for every assessment screen (personality now, career interests next) */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.assess {
+  width: min(100% - 2.5rem, 760px);
+  margin-inline: auto;
+  padding-block: clamp(2rem, 6vw, 4.5rem) clamp(3rem, 8vw, 6rem);
+}
+
+.assess__card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  animation: fade-up 0.6s var(--ease) both;
+}
+
+.assess h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.assess__lead {
+  margin-top: 1.1rem;
+  color: var(--ink-soft);
+  font-size: 1.1rem;
+}
+
+.assess__facts {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 1.75rem 0;
+}
+.assess__facts li {
+  font-size: 0.875rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: var(--sage-soft);
+  border: 1px solid var(--line);
+}
+
+.assess__details {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--ivory);
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.assess__details summary {
+  cursor: pointer;
+  font-weight: 500;
+}
+.assess__details div {
+  margin-top: 0.9rem;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+.assess__details p + p {
+  margin-top: 0.75rem;
+}
+
+.assess__note {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.75rem;
+}
+
+.assess__badge {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  background: var(--blush-soft);
+  border: 1px solid var(--line);
+  color: var(--blush-deep);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------- Progress bar ---------- */
+.progress {
+  margin-bottom: 2rem;
+}
+.progress__track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--ivory-deep);
+  overflow: hidden;
+}
+.progress__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--sage-deep);
+  transition: width 0.4s var(--ease);
+}
+
+/* ---------- Question ---------- */
+.question {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  animation: fade-up 0.45s var(--ease) both;
+}
+.question__legend {
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+.question__count {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sage-deep);
+  margin-bottom: 0.75rem;
+}
+.question__text {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+  line-height: 1.25;
+}
+
+.question__options {
+  display: grid;
+  gap: 0.65rem;
+}
+
+/* ---------- Answer option (a styled radio button) ---------- */
+.option {
+  position: relative;
+  display: block;
+}
+.option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.option__label {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.95rem 1.1rem;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+.option__dot {
+  flex: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  border: 2px solid var(--ink-soft);
+  transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.option:hover .option__label {
+  border-color: var(--ink-soft);
+}
+.option input:checked + .option__label {
+  border-color: var(--sage-deep);
+  background: var(--sage-soft);
+}
+.option input:checked + .option__label .option__dot {
+  background: var(--sage-deep);
+  border-color: var(--sage-deep);
+  box-shadow: inset 0 0 0 3px var(--sage-soft);
+}
+.option input:focus-visible + .option__label {
+  outline: 3px solid var(--lavender-deep);
+  outline-offset: 3px;
+}
+
+/* ---------- Buttons row ---------- */
+.assess__nav,
+.assess__actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* ---------- Result preview meters ---------- */
+.meters {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 2rem;
+  display: grid;
+  gap: 1.5rem;
+}
+.meter__top {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.meter__track {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--lavender-soft);
+  overflow: hidden;
+}
+.meter__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--lavender-deep);
+}
+.meter__summary {
+  margin-top: 0.5rem;
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+}

@@ -1,0 +1,46 @@
+.footer {
+  background: var(--ivory-deep);
+  border-top: 1px solid var(--line);
+  padding-block: 3.5rem 2rem;
+  scroll-margin-top: 4.5rem;
+}
+
+.footer__inner {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.footer__brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer__heading {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sage-deep);
+  margin-bottom: 0.75rem;
+}
+
+.footer__note {
+  color: var(--ink-soft);
+  font-size: 0.97rem;
+  max-width: 46ch;
+}
+
+.footer__legal {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+
+@media (min-width: 760px) {
+  .footer__inner {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}

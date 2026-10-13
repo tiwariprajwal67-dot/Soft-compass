@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(250, 246, 238, 0.82);
+ background: var(--header-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
@@ -105,5 +105,16 @@
   .header__nav a {
     padding: 0.25rem 0;
     font-size: 0.97rem;
+  }
+}
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 760px) {
+  .header__right {
+    gap: 2rem;
   }
 }

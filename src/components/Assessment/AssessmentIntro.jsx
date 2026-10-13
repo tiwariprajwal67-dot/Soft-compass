@@ -1,4 +1,18 @@
-export default function AssessmentIntro({ eyebrow, title, lead, questionCount, minutes, onStart }) {
+const personalityScoring = [
+  'You rate each statement from 1 (strongly disagree) to 5 (strongly agree). Each of the five dimensions is measured by six statements.',
+  'Some statements are worded in the opposite direction (for example, preferring quiet evenings alone). For those, your rating is flipped before adding up, so that a higher score always means "more of this dimension".',
+  'The six adjusted ratings are added together and rescaled to a 0–100 scale. A higher or lower score is not better or worse. It simply describes a tendency.',
+]
+
+export default function AssessmentIntro({
+  eyebrow,
+  title,
+  lead,
+  questionCount,
+  minutes,
+  scoring = personalityScoring,
+  onStart,
+}) {
   return (
     <section className="assess__card" aria-labelledby="intro-title">
       <span className="eyebrow">{eyebrow}</span>
@@ -14,21 +28,9 @@ export default function AssessmentIntro({ eyebrow, title, lead, questionCount, m
       <details className="assess__details">
         <summary>How is this scored?</summary>
         <div>
-          <p>
-            You rate each statement from 1 (strongly disagree) to 5 (strongly
-            agree). Each of the five dimensions is measured by six statements.
-          </p>
-          <p>
-            Some statements are worded in the opposite direction (for example,
-            preferring quiet evenings alone). For those, your rating is flipped
-            before adding up, so that a higher score always means "more of this
-            dimension".
-          </p>
-          <p>
-            The six adjusted ratings are added together and rescaled to a
-            0–100 scale. A higher or lower score is not better or worse. It
-            simply describes a tendency.
-          </p>
+          {scoring.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </div>
       </details>
 

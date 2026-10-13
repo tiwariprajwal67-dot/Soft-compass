@@ -22,5 +22,6 @@ export const assessments = [
       'Explore six interest areas (Realistic, Investigative, Artistic, Social, Enterprising and Conventional) and discover careers that may fit what you enjoy.',
     questions: 36,
     minutes: 6,
+    to: '/career-interests',
   },
 ]

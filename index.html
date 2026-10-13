@@ -3,6 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('soft-compass-theme')
+      document.documentElement.dataset.theme = saved === 'dark' ? 'dark' : 'light'
+    } catch (e) {
+      document.documentElement.dataset.theme = 'light'
+    }
+  })()
+</script>
     <meta
       name="description"
       content="Soft Compass: thoughtful, original self-reflection tools for exploring your personality and career interests."
@@ -20,4 +30,6 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
-</html>
+
+
+  </html>

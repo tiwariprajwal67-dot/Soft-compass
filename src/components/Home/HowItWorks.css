@@ -1,34 +1,35 @@
 .how {
-  background: var(--blush-soft);
+  background: linear-gradient(180deg, var(--blush-soft), var(--ivory) 90%);
   border-block: 1px solid var(--line);
 }
 
 .how__list {
   list-style: none;
   padding: 0;
-  margin: 2.5rem 0 0;
+  margin: 3rem 0 0;
   display: grid;
-  gap: 2.25rem;
+  gap: 2.5rem;
 }
 
+.how__step {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+/* big italic numerals in the display font */
 .how__number {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  margin-bottom: 1.1rem;
-  border-radius: 50%;
-  background: var(--paper);
-  border: 1px solid var(--line);
+  display: block;
   font-family: var(--font-display);
-  font-size: 1.2rem;
-  color: var(--blush-deep);
+  font-style: italic;
+  font-size: 3.6rem;
+  line-height: 1;
+  color: var(--lavender-deep);
+  margin-bottom: 1rem;
 }
 
 .how__step h3 {
-  font-size: 1.35rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.45rem;
+  margin-bottom: 0.6rem;
 }
 
 .how__step p {

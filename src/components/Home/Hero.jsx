@@ -1,6 +1,36 @@
+import { lazy, Suspense, useState } from 'react'
+import SceneBoundary from './SceneBoundary.jsx'
 import './Hero.css'
 
+// "lazy" means the heavy 3D code loads AFTER the text appears,
+// so the page never feels slow.
+const HeroScene = lazy(() => import('./HeroScene.jsx'))
+
+// The simple flat version, shown while 3D loads, or if 3D can't run.
+function FlatOrbs() {
+  return (
+    <div className="hero__scene hero__flat">
+      <div className="orbs">
+        <span className="orb orb--sage" />
+        <span className="orb orb--lavender" />
+        <span className="orb orb--blush" />
+      </div>
+    </div>
+  )
+}
+
+function deviceSupportsWebGL() {
+  try {
+    const canvas = document.createElement('canvas')
+    return Boolean(canvas.getContext('webgl2') || canvas.getContext('webgl'))
+  } catch {
+    return false
+  }
+}
+
 export default function Hero() {
+  const [webgl] = useState(deviceSupportsWebGL)
+
   return (
     <section className="hero" id="top">
       <div className="container hero__inner">
@@ -27,11 +57,20 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* Decorative overlapping circles (hidden from screen readers) */}
-        <div className="hero__art fade-up" style={{ '--delay': '0.25s' }} aria-hidden="true">
-          <span className="orb orb--sage" />
-          <span className="orb orb--lavender" />
-          <span className="orb orb--blush" />
+        {/* Decorative scene: hidden from screen readers */}
+        <div className="hero__stage fade-up" style={{ '--delay': '0.25s' }} aria-hidden="true">
+          <div className="hero__halo" />
+          {webgl ? (
+            <SceneBoundary fallback={<FlatOrbs />}>
+              <Suspense fallback={<FlatOrbs />}>
+                <div className="hero__scene">
+                  <HeroScene />
+                </div>
+              </Suspense>
+            </SceneBoundary>
+          ) : (
+            <FlatOrbs />
+          )}
         </div>
       </div>
     </section>

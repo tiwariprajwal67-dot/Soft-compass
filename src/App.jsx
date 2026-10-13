@@ -5,6 +5,7 @@ import ScrollManager from './components/layout/ScrollManager.jsx'
 import HomePage from './pages/HomePage.jsx'
 import PersonalityPage from './pages/PersonalityPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
+import RiasecPage from './pages/RiasecPage.jsx'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/personality" element={<PersonalityPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/career-interests" element={<RiasecPage />} />
         </Routes>
       </main>
       <Footer />

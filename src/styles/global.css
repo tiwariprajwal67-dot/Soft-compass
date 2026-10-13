@@ -1,36 +1,82 @@
 /* ---------- Design tokens: change a color here and it changes everywhere ---------- */
 :root {
-  --ivory: #faf6ee;
-  --ivory-deep: #f2ebdc;
-  --paper: #fffdf8;
+  color-scheme: light;
 
-  --sage: #a9bba5;
-  --sage-soft: #e1e8dc;
-  --sage-deep: #4d6a53;
+  --ivory: #f7f2e9;
+  --ivory-deep: #efe7d8;
+  --paper: #fffcf6;
 
-  --lavender: #bcaed3;
-  --lavender-soft: #e8e2f1;
-  --lavender-deep: #67588a;
+  --sage: #9db39b;
+  --sage-soft: #e3eadd;
+  --sage-deep: #3f5c46;
 
-  --blush: #f3d5cc;
-  --blush-soft: #faebe5;
-  --blush-deep: #a8604f;
+  --lavender: #b7a6d6;
+  --lavender-soft: #ebe5f5;
+  --lavender-deep: #5a4a86;
 
-  --ink: #2b2a33;
-  --ink-soft: #5a5862;
-  --line: rgba(43, 42, 51, 0.12);
+  --blush: #f1cfc4;
+  --blush-soft: #fbeee8;
+  --blush-deep: #9c5443;
+
+  --ink: #1f1e26;
+  --ink-soft: #55535e;
+  --line: rgba(31, 30, 38, 0.11);
 
   --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --radius: 24px;
-  --radius-sm: 14px;
-  --shadow-soft: 0 1px 2px rgba(43, 42, 51, 0.04),
-    0 14px 34px -14px rgba(43, 42, 51, 0.16);
-  --container: 1120px;
+  --radius: 28px;
+  --radius-sm: 16px;
+  --shadow-soft: 0 1px 2px rgba(31, 30, 38, 0.05),
+    0 18px 40px -18px rgba(31, 30, 38, 0.2);
+  --shadow-lift: 0 2px 4px rgba(31, 30, 38, 0.05),
+    0 30px 60px -22px rgba(63, 45, 110, 0.35);
+  --container: 1160px;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+    /* Extra tokens that night mode can change */
+  --glass: rgba(255, 252, 246, 0.7);
+  --header-bg: rgba(247, 242, 233, 0.82);
+  --ink-hover: #35333f;
+  --orb-blend: multiply;
+  --glow-a: rgba(183, 166, 214, 0.32);
+  --glow-b: rgba(241, 207, 196, 0.38);
 }
+/* ---------- Night mode ---------- */
+:root[data-theme='dark'] {
+  color-scheme: dark;
 
+  --ivory: #14131a;
+  --ivory-deep: #1a1922;
+  --paper: #1d1c27;
+
+  --sage: #7f977e;
+  --sage-soft: #1e2a24;
+  --sage-deep: #a9c8aa;
+
+  --lavender: #8e7cc0;
+  --lavender-soft: #231f35;
+  --lavender-deep: #c9bbf0;
+
+  --blush: #c98f80;
+  --blush-soft: #2b2025;
+  --blush-deep: #efae9c;
+
+  --ink: #f2ede3;
+  --ink-soft: #b6b2c0;
+  --line: rgba(242, 237, 227, 0.13);
+
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4),
+    0 18px 40px -18px rgba(0, 0, 0, 0.7);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.4),
+    0 30px 60px -22px rgba(142, 124, 192, 0.45);
+
+  --glass: rgba(29, 28, 39, 0.7);
+  --header-bg: rgba(20, 19, 26, 0.82);
+  --ink-hover: #ffffff;
+  --orb-blend: screen;
+  --glow-a: rgba(142, 124, 192, 0.2);
+  --glow-b: rgba(201, 143, 128, 0.12);
+}
 /* ---------- Reset ---------- */
 *,
 *::before,
@@ -50,13 +96,22 @@ body {
   line-height: 1.65;
   color: var(--ink);
   background-color: var(--ivory);
-  background-image: radial-gradient(
-    1200px 600px at 85% -10%,
-    var(--lavender-soft),
-    transparent 60%
-  );
+  background-image: radial-gradient(900px 520px at 88% -8%, var(--glow-a), transparent 65%),
+    radial-gradient(760px 480px at -6% 12%, var(--glow-b), transparent 65%);
   background-repeat: no-repeat;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+}
+
+/* A very faint film-grain texture over the whole page for a tactile, printed feel */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
 img,
@@ -69,9 +124,9 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: -0.01em;
+  font-weight: 450;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
@@ -79,7 +134,7 @@ h1 {
   font-size: clamp(2.5rem, 6vw, 4.25rem);
 }
 h2 {
-  font-size: clamp(1.9rem, 4vw, 2.75rem);
+  font-size: clamp(2rem, 4.5vw, 3.1rem);
 }
 h3 {
   font-size: 1.5rem;
@@ -100,18 +155,28 @@ a {
 }
 
 .section {
-  padding-block: clamp(3.5rem, 8vw, 6.5rem);
-  scroll-margin-top: 4.5rem; /* keeps headings clear of the sticky header */
+  padding-block: clamp(4rem, 9vw, 7rem);
+  scroll-margin-top: 4.5rem;
 }
 
 .eyebrow {
-  display: inline-block;
-  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--sage-deep);
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
+}
+/* a small hairline before every eyebrow label */
+.eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
 }
 
 /* ---------- Buttons ---------- */
@@ -123,13 +188,13 @@ a {
   font: inherit;
   font-weight: 500;
   font-size: 1rem;
-  padding: 0.85rem 1.6rem;
+  padding: 0.9rem 1.75rem;
   border-radius: 999px;
   border: 1.5px solid transparent;
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.25s var(--ease), background-color 0.25s var(--ease),
-    border-color 0.25s var(--ease);
+  transition: transform 0.3s var(--ease), background-color 0.3s var(--ease),
+    border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
 .btn:hover:not(:disabled) {
@@ -139,15 +204,19 @@ a {
 .btn--primary {
   background: var(--ink);
   color: var(--ivory);
+  box-shadow: 0 10px 24px -10px rgba(31, 30, 38, 0.6);
 }
 .btn--primary:hover:not(:disabled) {
-  background: #3d3c48;
+ background: var(--ink-hover);
+  box-shadow: 0 16px 30px -12px rgba(63, 45, 110, 0.55);
 }
 
 .btn--ghost {
-  background: transparent;
+  background: var(--glass);
   color: var(--ink);
   border-color: var(--line);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .btn--ghost:hover:not(:disabled) {
   border-color: var(--ink);
@@ -173,7 +242,7 @@ a {
   color: var(--ivory);
   padding: 0.7rem 1.1rem;
   border-radius: 999px;
-  z-index: 100;
+  z-index: 300;
   transition: top 0.2s var(--ease);
 }
 .skip-link:focus {
@@ -184,7 +253,7 @@ a {
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -194,7 +263,7 @@ a {
 
 .fade-up {
   opacity: 0;
-  animation: fade-up 0.8s var(--ease) forwards;
+  animation: fade-up 0.9s var(--ease) forwards;
   animation-delay: var(--delay, 0s);
 }
 

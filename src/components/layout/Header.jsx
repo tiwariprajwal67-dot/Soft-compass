@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import ThemeToggle from './ThemeToggle.jsx'
 import './Header.css'
 
-// Using "/#section" means these links also work from other pages.
 const links = [
   { to: '/#assessments', label: 'Assessments' },
   { to: '/#how-it-works', label: 'How it works' },
@@ -20,27 +20,31 @@ export default function Header() {
           Soft Compass
         </Link>
 
-        <button
-          type="button"
-          className="header__toggle"
-          aria-expanded={open}
-          aria-controls="primary-nav"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? 'Close' : 'Menu'}
-        </button>
+        <div className="header__right">
+          <nav
+            id="primary-nav"
+            className={`header__nav ${open ? 'is-open' : ''}`}
+            aria-label="Primary"
+          >
+            {links.map((link) => (
+              <Link key={link.to} to={link.to} onClick={() => setOpen(false)}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
-        <nav
-          id="primary-nav"
-          className={`header__nav ${open ? 'is-open' : ''}`}
-          aria-label="Primary"
-        >
-          {links.map((link) => (
-            <Link key={link.to} to={link.to} onClick={() => setOpen(false)}>
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+          <ThemeToggle />
+
+          <button
+            type="button"
+            className="header__toggle"
+            aria-expanded={open}
+            aria-controls="primary-nav"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? 'Close' : 'Menu'}
+          </button>
+        </div>
       </div>
     </header>
   )

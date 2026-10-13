@@ -1,0 +1,141 @@
+/* ---------- Interest code ---------- */
+.rcode {
+  display: flex;
+  gap: 0.8rem;
+  margin: 1.5rem 0 1.25rem;
+}
+
+.rcode__letter {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  line-height: 1;
+}
+.rcode__letter:nth-child(1) {
+  background: var(--sage-soft);
+  color: var(--sage-deep);
+}
+.rcode__letter:nth-child(2) {
+  background: var(--lavender-soft);
+  color: var(--lavender-deep);
+}
+.rcode__letter:nth-child(3) {
+  background: var(--blush-soft);
+  color: var(--blush-deep);
+}
+
+.rflat {
+  margin-top: 1.25rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--ivory);
+}
+
+/* ---------- Chart + bars ---------- */
+.rgrid {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  margin: 2rem 0 2.5rem;
+}
+
+.rgrid .meters {
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .rgrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.hex {
+  width: 100%;
+  max-width: 320px;
+  margin-inline: auto;
+}
+.hex__ring {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.hex__axis {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.hex__shape {
+  fill: var(--lavender);
+  fill-opacity: 0.35;
+  stroke: var(--lavender-deep);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.hex__dot {
+  fill: var(--lavender-deep);
+}
+.hex__label {
+  font-family: var(--font-display);
+  font-size: 17px;
+  fill: var(--ink);
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+/* ---------- Top areas ---------- */
+.assess h2 {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  margin-bottom: 1.25rem;
+}
+
+.rtypes {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.rtype {
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--ivory);
+}
+
+.rtype__rank {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sage-deep);
+}
+
+.rtype h3 {
+  font-size: 1.4rem;
+  margin: 0.3rem 0 0.6rem;
+}
+
+.rtype p {
+  color: var(--ink-soft);
+}
+
+.rtype__careers {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 1.1rem 0 0;
+}
+
+.rtype__careers li {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}

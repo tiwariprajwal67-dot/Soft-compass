@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import AssessmentIntro from '../components/assessment/AssessmentIntro.jsx'
 import ProgressBar from '../components/assessment/ProgressBar.jsx'
 import QuestionCard from '../components/assessment/QuestionCard.jsx'
-import CompletionScreen from '../components/assessment/CompletionScreen.jsx'
+import PersonalityResults from '../components/personality/PersonalityResults.jsx'
+import '../components/personality/personality.css'
 import { questions, answerOptions } from '../data/personalityQuestions.js'
 import { scorePersonality } from '../utils/scoring.js'
 import '../components/assessment/assessment.css'
@@ -100,7 +101,7 @@ export default function PersonalityPage() {
       )}
 
       {stage === 'complete' && (
-        <CompletionScreen results={scorePersonality(answers)} onRestart={handleRestart} />
+        <PersonalityResults results={scorePersonality(answers)} onRestart={handleRestart} />
       )}
     </div>
   )

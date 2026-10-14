@@ -13,6 +13,10 @@ const steps = [
     title: 'Reflect and explore',
     text: 'Read your profile, notice what resonates, and use the suggestions as starting points for your own thinking.',
   },
+  {
+    title: 'Just Relax and answer in chill mode',
+    text: 'Take your time and answer in a relaxed state. There is no pressure or time limit.',
+  }
 ]
 
 export default function HowItWorks() {

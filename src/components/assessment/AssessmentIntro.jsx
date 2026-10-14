@@ -35,7 +35,7 @@ export default function AssessmentIntro({
       </details>
 
       <p className="assess__note">
-        This is a reflection tool written for Soft Compass. It is not clinically
+        This is just a reflection tool written for Soft Compass. It is not clinically
         validated and is not a diagnosis. Nothing you answer is saved to a
         server at this stage.
       </p>

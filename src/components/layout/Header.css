@@ -118,3 +118,22 @@
     gap: 2rem;
   }
 }
+.sign-in-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  border: 1px solid var(--lg-line, rgba(128, 128, 128, 0.25));
+  border-radius: 999px;
+  background: rgba(128, 128, 128, 0.08);
+  color: var(--text-h);
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.sign-in-btn:hover {
+  background: rgba(128, 128, 128, 0.16);
+  transform: translateY(-1px);
+}

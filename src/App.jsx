@@ -6,7 +6,10 @@ import HomePage from './pages/HomePage.jsx'
 import PersonalityPage from './pages/PersonalityPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import RiasecPage from './pages/RiasecPage.jsx'
+import LoginPage from './pages/LoginPage'
 
+// example with React Router:
+<Route path="/login" element={<LoginPage />} />
 export default function App() {
   return (
     <>
@@ -22,6 +25,7 @@ export default function App() {
           <Route path="/personality" element={<PersonalityPage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/career-interests" element={<RiasecPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </main>
       <Footer />

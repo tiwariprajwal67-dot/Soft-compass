@@ -1,0 +1,349 @@
+/* ---------------------------------------------------------------
+   Login. Everything is scoped under .login and every class starts
+   with "lg-", so nothing here can leak into (or be changed by) the
+   rest of the site. It brings its own colours, so it does not depend
+   on your shared tokens. Night mode follows your existing switch:
+   :root[data-theme='dark'], and the system setting when no choice
+   has been made.
+   --------------------------------------------------------------- */
+
+.login {
+  --lg-sage: #9bb895;
+  --lg-lavender: #b7a5de;
+  --lg-blush: #f1c4b7;
+
+  /* day */
+  --lg-panel: #fbfaff;
+  --lg-stage-base: #f0edf9;
+  --lg-ink: #24212e;
+  --lg-ink-soft: #625e72;
+  --lg-line: #dcd8e8;
+  --lg-field: #f3f1f9;
+  --lg-accent: #7f69c0;
+  --lg-lav-text: #6a52ab;
+  --lg-danger: #b3404a;
+  --lg-btn-bg: #24212e;
+  --lg-btn-ink: #fbfaff;
+  --lg-eye: #fbf8f2;
+  --lg-pupil: #262233;
+  --lg-ring: #9a92b4;
+  --lg-shadow: rgba(70, 50, 120, 0.28);
+
+  --lg-display: var(--font-display, 'Instrument Serif', Georgia, 'Times New Roman', serif);
+
+  position: relative;
+  display: flex;
+  padding-block: clamp(24px, 5vw, 64px);
+  padding-inline: max(16px, env(safe-area-inset-left, 0px));
+  color: var(--lg-ink);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* night: your manual switch */
+:root[data-theme='dark'] .login {
+  --lg-panel: #1b1b25;
+  --lg-stage-base: #191923;
+  --lg-ink: #f3eee6;
+  --lg-ink-soft: #a8a5b8;
+  --lg-line: #2c2c3a;
+  --lg-field: #14141b;
+  --lg-accent: #b7a5de;
+  --lg-lav-text: #c8b8f2;
+  --lg-danger: #f2a7a7;
+  --lg-btn-bg: #f3eee6;
+  --lg-btn-ink: #1a1a22;
+  --lg-ring: #8f87ab;
+  --lg-shadow: rgba(0, 0, 0, 0.5);
+}
+/* night: the system setting, when no manual choice was made */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme='dark']) .login {
+    --lg-panel: #1b1b25;
+    --lg-stage-base: #191923;
+    --lg-ink: #f3eee6;
+    --lg-ink-soft: #a8a5b8;
+    --lg-line: #2c2c3a;
+    --lg-field: #14141b;
+    --lg-accent: #b7a5de;
+    --lg-lav-text: #c8b8f2;
+    --lg-danger: #f2a7a7;
+    --lg-btn-bg: #f3eee6;
+    --lg-btn-ink: #1a1a22;
+    --lg-ring: #8f87ab;
+    --lg-shadow: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.login *,
+.login *::before,
+.login *::after {
+  box-sizing: border-box;
+}
+/* :where() keeps this reset at zero weight, so the component's own colours win */
+:where(.login) button,
+:where(.login) input {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---------- Card ---------- */
+.lg-card {
+  width: 100%;
+  max-width: 1060px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  background: var(--lg-panel);
+  border: 1px solid var(--lg-line);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 40px 90px -40px var(--lg-shadow);
+}
+
+/* ---------- Stage (the characters) ---------- */
+.lg-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  min-height: 620px;
+  padding: 28px 28px 26px;
+  border-right: 1px solid var(--lg-line);
+  background:
+    radial-gradient(52% 46% at 62% 40%, color-mix(in srgb, var(--lg-lavender) 24%, transparent), transparent),
+    radial-gradient(38% 34% at 16% 78%, color-mix(in srgb, var(--lg-sage) 22%, transparent), transparent),
+    radial-gradient(34% 30% at 90% 88%, color-mix(in srgb, var(--lg-blush) 24%, transparent), transparent),
+    var(--lg-stage-base);
+}
+.lg-brand {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 10px;
+  font-family: var(--lg-display);
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
+.lg-brand svg {
+  display: block;
+}
+.lg-art {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 280px;
+  overflow: visible;
+}
+.lg-caption {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--lg-line);
+  background: color-mix(in srgb, var(--lg-panel) 72%, transparent);
+  color: var(--lg-ink-soft);
+  font-size: 0.92rem;
+}
+.lg-caption-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lg-sage);
+}
+
+/* SVG pieces */
+.lg-shadow-blob { fill: url(#lg-shadow-grad); }
+.lg-sclera { fill: var(--lg-eye); stroke: rgba(40, 30, 60, 0.14); stroke-width: 1; }
+.lg-iris { fill: var(--lg-pupil); }
+.lg-glint { fill: #fff; }
+.lg-lid { transform-box: fill-box; transform-origin: center; }
+.lg-squish { transform-box: fill-box; transform-origin: 50% 100%; }
+.lg-bob { animation: lg-bob 4.6s ease-in-out infinite alternate; }
+@keyframes lg-bob {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+.lg-mouth path { stroke: var(--lg-pupil); stroke-linecap: round; stroke-linejoin: round; fill: none; }
+.lg-mouth.is-open path { fill: var(--lg-pupil); }
+.lg-ring { fill: none; stroke: var(--lg-ring); stroke-width: 2.6; stroke-linecap: round; }
+.lg-bead { fill: #fffaf1; }
+
+/* ---------- Form side ---------- */
+.lg-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 26px;
+  min-width: 0;
+  padding: clamp(28px, 5vw, 56px) clamp(22px, 5vw, 52px);
+}
+.lg-title {
+  margin: 0;
+  font-family: var(--lg-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 5vw, 3.3rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--lg-ink);
+  text-wrap: balance;
+}
+.lg-title em {
+  font-style: italic;
+  color: var(--lg-lav-text);
+}
+.lg-sub {
+  margin: 10px 0 0;
+  max-width: 30ch;
+  color: var(--lg-ink-soft);
+}
+
+.lg-form { display: grid; gap: 18px; margin: 0; }
+.lg-field { display: grid; gap: 8px; }
+.lg-label { font-size: 0.86rem; font-weight: 600; letter-spacing: 0.01em; }
+.lg-control { position: relative; }
+.lg-input {
+  width: 100%;
+  height: 54px;
+  padding: 0 16px;
+  border: 1px solid var(--lg-line);
+  border-radius: 14px;
+  background: var(--lg-field);
+  color: var(--lg-ink);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.lg-input::placeholder { color: color-mix(in srgb, var(--lg-ink-soft) 70%, transparent); }
+.lg-input:focus-visible {
+  outline: none;
+  border-color: var(--lg-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--lg-accent) 25%, transparent);
+}
+.lg-input[aria-invalid='true'] { border-color: var(--lg-danger); }
+.lg-input--pw { padding-right: 56px; }
+
+.lg-toggle {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  color: var(--lg-ink-soft);
+  cursor: pointer;
+}
+.lg-toggle:hover { color: var(--lg-ink); background: color-mix(in srgb, var(--lg-ink) 8%, transparent); }
+.lg-toggle:focus-visible { outline: 2px solid var(--lg-accent); outline-offset: 1px; }
+
+.lg-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  font-size: 0.92rem;
+}
+.lg-check { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; color: var(--lg-ink-soft); }
+.lg-check input { width: 18px; height: 18px; margin: 0; accent-color: var(--lg-accent); }
+.lg-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--lg-lav-text);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--lg-lav-text) 40%, transparent);
+  text-underline-offset: 3px;
+}
+.lg-link:hover { text-decoration-color: currentColor; }
+.lg-link:focus-visible,
+.lg-check input:focus-visible,
+.lg-btn:focus-visible {
+  outline: 2px solid var(--lg-accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.lg-error { margin: -4px 0 0; color: var(--lg-danger); font-size: 0.9rem; }
+
+.lg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  width: 100%;
+  height: 56px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s, background 0.2s;
+}
+.lg-btn--primary { background: var(--lg-btn-bg); color: var(--lg-btn-ink); }
+.lg-btn--primary:hover:not(:disabled) { transform: translateY(-1px); }
+.lg-btn--primary:hover:not(:disabled) .lg-arrow { transform: translateX(3px); }
+.lg-btn--primary:disabled { opacity: 0.75; cursor: default; }
+.lg-arrow { transition: transform 0.25s; }
+.lg-btn--ghost { background: transparent; border-color: var(--lg-line); color: var(--lg-ink); }
+.lg-btn--ghost:hover { background: color-mix(in srgb, var(--lg-ink) 6%, transparent); }
+
+.lg-or {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--lg-ink-soft);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.lg-or::before,
+.lg-or::after { content: ''; flex: 1; height: 1px; background: var(--lg-line); }
+
+.lg-foot { display: grid; gap: 10px; font-size: 0.92rem; color: var(--lg-ink-soft); }
+.lg-foot p { margin: 0; }
+.lg-demo { font-size: 0.85rem; }
+.lg-demo code {
+  padding: 2px 7px;
+  border: 1px solid var(--lg-line);
+  border-radius: 7px;
+  background: var(--lg-field);
+  color: var(--lg-ink);
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Phones and tablets: characters on top, form below ---------- */
+@media (max-width: 860px) {
+  .lg-card { grid-template-columns: minmax(0, 1fr); }
+  .lg-stage {
+    min-height: 0;
+    padding: 20px 20px 18px;
+    border-right: 0;
+    border-bottom: 1px solid var(--lg-line);
+  }
+  .lg-art {
+    flex: none;
+    align-self: center;
+    width: 100%;
+    max-width: 340px;
+    min-height: 0;
+    height: auto;
+    aspect-ratio: 520 / 470;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lg-bob { animation: none; }
+  .lg-btn,
+  .lg-arrow,
+  .lg-input { transition: none; }
+}

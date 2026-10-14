@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom'
 import ThemeToggle from './ThemeToggle.jsx'
 import './Header.css'
 
+
 const links = [
   { to: '/#assessments', label: 'Assessments' },
   { to: '/#how-it-works', label: 'How it works' },
   { to: '/#privacy', label: 'Privacy' },
+  { to: '/login', label: 'Sign in' }
+
 ]
 
 export default function Header() {

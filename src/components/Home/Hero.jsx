@@ -6,30 +6,30 @@ import './Hero.css'
 // so the page never feels slow.
 const HeroScene = lazy(() => import('./HeroScene.jsx'))
 
-// The simple flat version, shown while 3D loads, or if 3D can't run.
-function FlatOrbs() {
-  return (
-    <div className="hero__scene hero__flat">
-      <div className="orbs">
-        <span className="orb orb--sage" />
-        <span className="orb orb--lavender" />
-        <span className="orb orb--blush" />
-      </div>
-    </div>
-  )
-}
-
-function deviceSupportsWebGL() {
+// Decide once whether to even try 3D: needs WebGL, and we skip it when the
+// visitor has asked their browser to save data or the device reports very little memory.
+function canUse3D() {
   try {
+    if (navigator.connection?.saveData) return false
+    if (navigator.deviceMemory && navigator.deviceMemory <= 2) return false
+
     const canvas = document.createElement('canvas')
-    return Boolean(canvas.getContext('webgl2') || canvas.getContext('webgl'))
+    const gl = canvas.getContext('webgl2') || canvas.getContext('webgl')
+    if (!gl) return false
+    // Give the test context straight back (browsers only allow a handful).
+    gl.getExtension('WEBGL_lose_context')?.loseContext()
+    return true
   } catch {
     return false
   }
 }
 
 export default function Hero() {
-  const [webgl] = useState(deviceSupportsWebGL)
+  const [use3D] = useState(canUse3D)
+  const [sceneReady, setSceneReady] = useState(false)
+  const [sceneLost, setSceneLost] = useState(false)
+
+  const showScene = use3D && !sceneLost
 
   return (
     <section className="hero" id="top">
@@ -46,6 +46,21 @@ export default function Hero() {
           <div className="hero__actions fade-up" style={{ '--delay': '0.3s' }}>
             <a className="btn btn--primary" href="#assessments">
               Explore the assessments
+              <svg
+                className="btn__arrow"
+                viewBox="0 0 16 16"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
             </a>
             <a className="btn btn--ghost" href="#how-it-works">
               How it works
@@ -57,19 +72,33 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* Decorative scene: hidden from screen readers */}
+        {/* Decorative artwork: hidden from screen readers.
+            Layers, back to front: glow, soft ground shadow, flat circles
+            (always there, so the page never looks empty), then the 3D scene. */}
         <div className="hero__stage fade-up" style={{ '--delay': '0.25s' }} aria-hidden="true">
           <div className="hero__halo" />
-          {webgl ? (
-            <SceneBoundary fallback={<FlatOrbs />}>
-              <Suspense fallback={<FlatOrbs />}>
-                <div className="hero__scene">
-                  <HeroScene />
-                </div>
+          <div className="hero__ground" />
+
+          <div className={`hero__flat ${showScene && sceneReady ? 'is-hidden' : ''}`}>
+            <div className="orbs">
+              <span className="orb orb--sage" />
+              <span className="orb orb--lavender" />
+              <span className="orb orb--blush" />
+            </div>
+          </div>
+
+          {showScene && (
+            <SceneBoundary fallback={null}>
+              <Suspense fallback={null}>
+                <HeroScene
+                  onReady={() => setSceneReady(true)}
+                  onLost={() => {
+                    setSceneReady(false)
+                    setSceneLost(true)
+                  }}
+                />
               </Suspense>
             </SceneBoundary>
-          ) : (
-            <FlatOrbs />
           )}
         </div>
       </div>

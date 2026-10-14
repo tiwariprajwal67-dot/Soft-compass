@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/layout/Header.jsx'
 import Footer from './components/layout/Footer.jsx'
-import ScrollManager from './components/layout/ScrollManager.jsx'
+import ScrollManager from './components/layout/scrollmanager.jsx'
 import HomePage from './pages/HomePage.jsx'
 import PersonalityPage from './pages/PersonalityPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'

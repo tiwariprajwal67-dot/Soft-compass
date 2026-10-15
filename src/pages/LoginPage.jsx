@@ -7,7 +7,6 @@ export default function LoginPage() {
   return (
     <Login
       brand="Soft Compass"
-      showDemo={true}
       onSuccess={() => {
         // After successful login → go home
         navigate('/')

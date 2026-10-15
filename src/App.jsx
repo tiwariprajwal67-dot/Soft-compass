@@ -8,6 +8,7 @@ import NotFoundPage from './pages/NotFoundPage.jsx'
 import RiasecPage from './pages/RiasecPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import CompassCrew from './components/layout/CompassCrew.jsx'
+import SoftDrift from './components/layout/SoftDrift.jsx'
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
       </a>
       <Header />
       <CompassCrew />
+      <SoftDrift />
       <main id="main">
         {/* Each Route says: "when the address is X, show page Y" */}
         <Routes>

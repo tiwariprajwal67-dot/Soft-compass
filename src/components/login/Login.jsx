@@ -11,17 +11,15 @@ import './Login.css'
 //
 // Props (all optional):
 //   onSubmit({ email, password, remember })  async, return true/false or { ok, message }.
-//                                            Without it, the demo login below is used.
+//                                            Without it, sign-in reports "not available yet" and
+//                                            nothing is sent anywhere.
 //   onSuccess(result)                        called ~1.6s after a good login, so the
 //                                            celebration plays before you navigate.
 //   onForgot / onSignup / onGuest            link and button handlers.
 //   brand                                    name shown top-left (default "Soft Compass").
-//   showDemo                                 show the demo-login hint (default true; set
-//                                            false once real authentication is wired in).
 // ---------------------------------------------------------------
 
 const VB = { w: 520, h: 470 }
-const DEMO = { email: 'hello@softcompass.app', password: 'compass' }
 
 const CHARS = [
   { id: 'sage',  cx: 116, cy: 326, R: 82,  dy: -4,  ex: 23, er: 11.5, pr: 6.2, my: 30, mk: 0.8,  cols: ['#d3e3cc', '#9bb895', '#78987a'], hand: '#86a480', cheek: '#f1c4b7', bd: '-1.2s', bt: '5.2s' },
@@ -64,11 +62,10 @@ const CAPTIONS = {
 }
 
 const EMAIL_RE = /^\S+@\S+\.\S+$/
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-async function demoAuth({ email, password }) {
-  await wait(700)
-  return email.toLowerCase() === DEMO.email && password === DEMO.password
+// Used when no onSubmit is passed. There is no account system yet, so nothing is checked or sent.
+async function unavailable() {
+  return { ok: false, message: 'Sign-in is not available yet. You can continue as a guest.' }
 }
 
 // ---------- Static drawing ----------
@@ -136,7 +133,6 @@ export default function Login({
   onSignup,
   onGuest,
   brand = 'Soft Compass',
-  showDemo = true,
 }) {
   const uid = 'lg' + useId().replace(/[^a-zA-Z0-9]/g, '')
 
@@ -339,8 +335,8 @@ export default function Login({
         const pose = POSE[cur][cfg.id]
         const sx = ox + cfg.cx * s
         const sy = oy + cfg.cy * s
-        let dirx = 0
-        let diry = 0
+        let dirx
+        let diry
         let mag = 1
 
         if (Array.isArray(pose.look)) {
@@ -473,7 +469,7 @@ export default function Login({
     setBusy(true)
     let result
     try {
-      result = await (onSubmit ? onSubmit({ email, password, remember }) : demoAuth({ email, password }))
+      result = await (onSubmit || unavailable)({ email, password, remember })
     } catch {
       result = { ok: false, message: 'Something went wrong. Please try again.' }
     }
@@ -490,29 +486,6 @@ export default function Login({
     }
   }
 
-  const reset = () => {
-    clearTimeout(successTimer.current)
-    setLocked(false)
-    setBusy(false)
-    api.current?.setOverride(null)
-    emailRef.current.value = ''
-    pwRef.current.value = ''
-    S.current.pwVisible = false
-    setPwVisible(false)
-    api.current?.updateCaret()
-    emailRef.current.focus()
-  }
-
-  const fillDemo = () => {
-    emailRef.current.value = DEMO.email
-    pwRef.current.value = DEMO.password
-    setError('')
-    setInvalid(null)
-    api.current?.updateCaret()
-    api.current?.nudge()
-    api.current?.flash('Filled in. Press Sign in.')
-  }
-
   const togglePw = () => {
     const next = !pwVisible
     S.current.pwVisible = next
@@ -521,7 +494,7 @@ export default function Login({
     pwRef.current.focus()
   }
 
-  const stub = (handler, message) => () => {
+  const stub = (handler, message) => {
     if (handler) handler()
     else api.current?.flash(message)
   }
@@ -661,7 +634,7 @@ export default function Login({
                 <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
                 Keep me signed in
               </label>
-              <button type="button" className="lg-link" onClick={stub(onForgot, 'Demo only: this link does not go anywhere yet.')}>
+              <button type="button" className="lg-link" onClick={() => stub(onForgot, 'Not available yet.')}>
                 Forgot password?
               </button>
             </div>
@@ -682,7 +655,7 @@ export default function Login({
             className="lg-btn lg-btn--ghost"
             onClick={() => {
               api.current?.nudge()
-              stub(onGuest, 'This is a demo, so guest mode does not go anywhere yet.')()
+              stub(onGuest, 'Guest mode is not available yet.')
             }}
           >
             Continue as a guest
@@ -691,22 +664,10 @@ export default function Login({
           <div className="lg-foot">
             <p>
               New here?{' '}
-              <button type="button" className="lg-link" onClick={stub(onSignup, 'Demo only: this link does not go anywhere yet.')}>
+              <button type="button" className="lg-link" onClick={() => stub(onSignup, 'Not available yet.')}>
                 Create an account
               </button>
             </p>
-            {showDemo && (
-              <p className="lg-demo">
-                {locked ? (
-                  <button type="button" className="lg-link" onClick={reset}>Sign out and try again</button>
-                ) : (
-                  <>
-                    Demo login: <code>{DEMO.email}</code> <code>{DEMO.password}</code>{' '}
-                    <button type="button" className="lg-link" onClick={fillDemo}>Fill it in</button>
-                  </>
-                )}
-              </p>
-            )}
           </div>
         </div>
       </div>

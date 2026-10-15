@@ -6,6 +6,10 @@ export default defineConfig({
   resolve: {
     dedupe: ['react', 'react-dom'],
   },
+  build: {
+    // Never publish source maps: they would hand visitors your original source files.
+    sourcemap: false,
+  },
   // optional but helpful
   optimizeDeps: {
     include: ['@react-three/fiber', '@react-three/drei', 'three'],

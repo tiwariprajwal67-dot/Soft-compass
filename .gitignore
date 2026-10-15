@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment files (never commit secrets; keep a .env.example if you add one)
+.env
+.env.*
+!.env.example

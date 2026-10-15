@@ -6,10 +6,9 @@ import HomePage from './pages/HomePage.jsx'
 import PersonalityPage from './pages/PersonalityPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
 import RiasecPage from './pages/RiasecPage.jsx'
-import LoginPage from './pages/LoginPage'
+import LoginPage from './pages/LoginPage.jsx'
+import CompassCrew from './components/layout/CompassCrew.jsx'
 
-// example with React Router:
-<Route path="/login" element={<LoginPage />} />
 export default function App() {
   return (
     <>
@@ -18,14 +17,15 @@ export default function App() {
         Skip to main content
       </a>
       <Header />
+      <CompassCrew />
       <main id="main">
         {/* Each Route says: "when the address is X, show page Y" */}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/personality" element={<PersonalityPage />} />
-          <Route path="*" element={<NotFoundPage />} />
           <Route path="/career-interests" element={<RiasecPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <Footer />

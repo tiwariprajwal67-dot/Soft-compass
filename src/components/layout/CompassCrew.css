@@ -1,0 +1,73 @@
+/* ---------------------------------------------------------------
+   CompassCrew. Everything is scoped under .cc-layer and every class
+   starts with "cc-", so it cannot touch (or be touched by) the rest of
+   the site. The layer is fixed over the page and ignores the mouse
+   everywhere except on the three little creatures themselves.
+   --------------------------------------------------------------- */
+
+.cc-layer {
+  --cc-thread: rgba(60, 45, 100, 0.45);
+  --cc-z: #6a52ab;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+:root[data-theme='dark'] .cc-layer {
+  --cc-thread: rgba(255, 255, 255, 0.4);
+  --cc-z: #c8b8f2;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme='dark']) .cc-layer {
+    --cc-thread: rgba(255, 255, 255, 0.4);
+    --cc-z: #c8b8f2;
+  }
+}
+
+.cc-thread {
+  stroke: var(--cc-thread);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+.cc-knot {
+  fill: var(--cc-thread);
+}
+
+/* the only parts that listen to the mouse */
+.cc-hit {
+  fill: transparent;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.cc-sclera { fill: #fbf8f2; stroke: rgba(40, 30, 60, 0.18); stroke-width: 0.35; }
+.cc-iris { fill: #262233; }
+.cc-glint { fill: #fff; }
+.cc-lid { transform-box: fill-box; transform-origin: center; }
+.cc-mouth path { stroke: #262233; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.cc-mouth.is-open path { fill: #262233; }
+
+/* little sleeping letters that drift up */
+.cc-zs { display: none; }
+.is-sleeping .cc-zs { display: block; }
+.cc-z {
+  fill: var(--cc-z);
+  font: 700 7px/1 system-ui, sans-serif;
+  opacity: 0;
+  animation: cc-z 2.8s ease-in-out infinite;
+}
+.cc-z2 { animation-delay: 1.4s; }
+@keyframes cc-z {
+  0% { opacity: 0; transform: translate(0, 0); }
+  30% { opacity: 0.9; }
+  100% { opacity: 0; transform: translate(5px, -11px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-z { animation: none; opacity: 0.8; }
+}

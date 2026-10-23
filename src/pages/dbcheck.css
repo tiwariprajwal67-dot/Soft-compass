@@ -1,0 +1,58 @@
+.dbc {
+  list-style: none;
+  padding: 0;
+  margin: 1.75rem 0 1.25rem;
+  display: grid;
+  gap: 0.85rem;
+}
+.dbc__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--ivory);
+}
+.dbc__badge {
+  min-width: 4.6rem;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+.dbc__item[data-status='ok'] .dbc__badge {
+  background: var(--sage-soft);
+  color: var(--sage-deep);
+}
+.dbc__item[data-status='warn'] .dbc__badge {
+  background: var(--lavender-soft);
+  color: var(--lavender-deep);
+}
+.dbc__item[data-status='fail'] .dbc__badge {
+  background: var(--blush-soft);
+  color: var(--blush-deep);
+}
+.dbc__item[data-status='fail'] {
+  border-color: var(--blush-deep);
+}
+.dbc__title {
+  font-weight: 600;
+}
+.dbc__detail {
+  margin-top: 0.2rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+.dbc__summary {
+  font-weight: 500;
+}
+.dbc__loading {
+  margin-top: 1.5rem;
+  color: var(--ink-soft);
+}

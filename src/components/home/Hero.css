@@ -137,7 +137,23 @@
 }
 
 .hero {
-  overflow-x: clip;       /* new: the overhang must never cause sideways scrolling */
+ .hero {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip; /* the artwork may bleed past the grid, never sideways past the page */
+  padding-block: clamp(2rem, 6vw, 4.5rem) clamp(2.5rem, 6vw, 5rem);
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* the overhang overlaps the text column */
+  opacity: 0;
+  transition: opacity 0.9s var(--ease);
+}
+.hero-canvas.is-ready {
+  opacity: 1;
+}
 }
 .hero-canvas.is-ready {
   opacity: 1;

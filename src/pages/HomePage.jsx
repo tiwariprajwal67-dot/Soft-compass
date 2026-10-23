@@ -2,7 +2,8 @@ import Hero from '../components/home/Hero.jsx'
 import AssessmentCard from '../components/home/AssessmentCard.jsx'
 import HowItWorks from '../components/home/HowItWorks.jsx'
 import { assessments } from '../data/assessments.js'
-
+import AboutSection from '../components/home/AboutSection.jsx'
+import ContactSection from '../components/home/ContactSection.jsx'
 export default function HomePage() {
   return (
     <>
@@ -21,6 +22,8 @@ export default function HomePage() {
       </section>
 
       <HowItWorks />
+      <AboutSection />
+      <ContactSection />
     </>
   )
 }

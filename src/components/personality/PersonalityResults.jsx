@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import RadarChart from './RadarChart.jsx'
 import { insights, bandFor, bandLabels } from '../../data/personalityInsights.js'
+import DownloadReportButton from '../../report/DownloadReportButton.jsx'
 
 export default function PersonalityResults({ results, onRestart }) {
   const rows = results.map((result) => {
@@ -109,10 +110,11 @@ export default function PersonalityResults({ results, onRestart }) {
         about how you feel, please talk to a professional you trust.
       </p>
 
-      <div className="assess__actions">
+            <div className="assess__actions">
         <button type="button" className="btn btn--ghost" onClick={onRestart}>
           Retake
         </button>
+        <DownloadReportButton kind="personality" results={results} />
         <Link className="btn btn--ghost" to="/career-interests">
           Explore career interests
         </Link>

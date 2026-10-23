@@ -1,0 +1,58 @@
+.contact {
+  background: linear-gradient(180deg, transparent, var(--blush-soft));
+  border-top: 1px solid var(--line);
+}
+.contact h2 em {
+  font-style: italic;
+  color: var(--lavender-deep);
+}
+.contact__lead {
+  margin-top: 1.3rem;
+  max-width: 38rem;
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+}
+
+.contact__cards {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.4rem;
+}
+@media (min-width: 900px) {
+  .contact__cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.contact__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 1.6rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+}
+.contact__card h3 {
+  font-size: 1.3rem;
+}
+.contact__card p {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+.contact__card .btn {
+  margin-top: auto;
+  padding: 0.7rem 1.4rem;
+}
+
+.contact__soon {
+  margin-top: 1.4rem;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.contact__note {
+  margin-top: 2rem;
+  max-width: 44rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import HexagonChart from './HexagonChart.jsx'
+import DownloadReportButton from '../../report/DownloadReportButton.jsx'
 
 const rankLabels = ['Strongest area', 'Second area', 'Third area']
 
@@ -87,10 +88,11 @@ export default function RiasecResults({ results, onRestart }) {
         clinically validated.
       </p>
 
-      <div className="assess__actions">
+            <div className="assess__actions">
         <button type="button" className="btn btn--ghost" onClick={onRestart}>
           Retake
         </button>
+        <DownloadReportButton kind="riasec" results={results} />
         <Link className="btn btn--primary" to="/">
           Back to home
         </Link>

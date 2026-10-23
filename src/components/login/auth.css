@@ -1,0 +1,90 @@
+/* Extra styles for the account screens. They reuse your .lg-* classes from Login.css. */
+
+.login--auth .lg-card {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 520px;
+}
+.login--auth .lg-panel {
+  gap: 22px;
+}
+.login--auth .lg-title {
+  font-size: clamp(2.1rem, 5vw, 2.8rem);
+}
+
+.lg-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--lg-ink-soft);
+}
+
+.lg-notice {
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--lg-line);
+  border-radius: 14px;
+  background: var(--lg-field);
+  color: var(--lg-ink-soft);
+  font-size: 0.92rem;
+}
+.lg-notice--ok {
+  border-color: color-mix(in srgb, var(--lg-sage) 60%, var(--lg-line));
+  color: var(--lg-ink);
+}
+
+.lg-agree {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--lg-ink-soft);
+  cursor: pointer;
+}
+.lg-agree input {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--lg-accent);
+}
+.lg-agree a {
+  color: var(--lg-lav-text);
+  font-weight: 600;
+}
+
+/* links styled as buttons (for example on the account screen) */
+.login a.lg-btn,
+.login a.lg-link {
+  text-decoration: none;
+}
+.login a.lg-link {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--lg-lav-text) 40%, transparent);
+  text-underline-offset: 3px;
+}
+
+.lg-facts {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+.lg-facts div {
+  display: grid;
+  gap: 2px;
+}
+.lg-facts dt {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lg-ink-soft);
+}
+.lg-facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.auth-loading {
+  padding: 4rem 1.25rem;
+  text-align: center;
+  color: var(--ink-soft, #625e72);
+}

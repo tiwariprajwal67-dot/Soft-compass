@@ -302,7 +302,7 @@ export default function Login({
     }
 
     const frame = (now) => {
-      if (!alive) return
+            if (!alive || !root.isConnected) return
       const dt = Math.min(0.05, (now - last) / 1000)
       last = now
 
@@ -636,7 +636,7 @@ export default function Login({
                   name="password"
                   type={pwVisible ? 'text' : 'password'}
                   autoComplete="current-password"
-                  placeholder="At least 6 characters"
+                  placeholder="Your password"
                   disabled={locked}
                   aria-invalid={invalid === 'password' ? 'true' : undefined}
                   onInput={clearInvalid}

@@ -3,13 +3,6 @@
   border-block: 1px solid var(--line);
 }
 
-.how__list {
-  list-style: none;
-  padding: 0;
-  margin: 3rem 0 0;
-  display: grid;
-  gap: 2.5rem;
-}
 
 .how__step {
   padding-top: 1.5rem;
@@ -37,9 +30,18 @@
   max-width: 34ch;
 }
 
+.how__list {
+  list-style: none;
+  padding: 0;
+  margin: 3rem 0 0;
+  display: grid;
+  gap: 2.5rem;
+}
+
 @media (min-width: 800px) {
   .how__list {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
     gap: 3rem;
   }
 }
+

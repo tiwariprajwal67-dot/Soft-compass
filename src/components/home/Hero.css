@@ -34,18 +34,11 @@
 }
 
 /* "gently": the brand accent. Italic, lavender, with a soft marker-style wash */
+/* "gently": the brand accent. Italic and lavender */
 .hero h1 em {
   font-style: italic;
   color: var(--lavender-deep);
   padding-inline: 0.05em;
-  background: linear-gradient(
-    to top,
-    transparent 0.1em,
-    color-mix(in srgb, var(--lavender) 30%, transparent) 0.1em 0.3em,
-    transparent 0.3em
-  );
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
 }
 
 .hero__lead {

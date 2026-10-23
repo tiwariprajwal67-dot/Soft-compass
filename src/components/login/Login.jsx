@@ -339,8 +339,8 @@ export default function Login({
         const pose = POSE[cur][cfg.id]
         const sx = ox + cfg.cx * s
         const sy = oy + cfg.cy * s
-        let dirx = 0
-        let diry = 0
+        let dirx
+        let diry
         let mag = 1
 
         if (Array.isArray(pose.look)) {
@@ -521,7 +521,9 @@ export default function Login({
     pwRef.current.focus()
   }
 
-  const stub = (handler, message) => () => {
+  // Runs the real handler when there is one, otherwise shows the demo message.
+  // It is only called from click handlers, never while the page is drawing.
+  const runOrFlash = (handler, message) => {
     if (handler) handler()
     else api.current?.flash(message)
   }
@@ -661,7 +663,7 @@ export default function Login({
                 <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} />
                 Keep me signed in
               </label>
-              <button type="button" className="lg-link" onClick={stub(onForgot, 'Demo only: this link does not go anywhere yet.')}>
+              <button type="button" className="lg-link" onClick={() => runOrFlash(onForgot, 'Demo only: this link does not go anywhere yet.')}>
                 Forgot password?
               </button>
             </div>
@@ -682,7 +684,7 @@ export default function Login({
             className="lg-btn lg-btn--ghost"
             onClick={() => {
               api.current?.nudge()
-              stub(onGuest, 'This is a demo, so guest mode does not go anywhere yet.')()
+              runOrFlash(onGuest, 'This is a demo, so guest mode does not go anywhere yet.')
             }}
           >
             Continue as a guest
@@ -691,7 +693,7 @@ export default function Login({
           <div className="lg-foot">
             <p>
               New here?{' '}
-              <button type="button" className="lg-link" onClick={stub(onSignup, 'Demo only: this link does not go anywhere yet.')}>
+              <button type="button" className="lg-link" onClick={() => runOrFlash(onSignup, 'Demo only: this link does not go anywhere yet.')}>
                 Create an account
               </button>
             </p>

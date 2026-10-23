@@ -1,9 +1,7 @@
 .how {
-  background: linear-gradient(180deg, var(--blush-soft), var(--ivory) 90%);
+  background: transparent;
   border-block: 1px solid var(--line);
 }
-
-
 .how__step {
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);

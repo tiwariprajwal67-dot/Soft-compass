@@ -4,10 +4,16 @@ import HowItWorks from '../components/home/HowItWorks.jsx'
 import { assessments } from '../data/assessments.js'
 import AboutSection from '../components/home/AboutSection.jsx'
 import ContactSection from '../components/home/ContactSection.jsx'
+import ScrollEffects from '../components/layout/ScrollEffects.jsx'
+
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <>
+  <ScrollEffects />
+  <Hero />
+  
+</>
 
       <section id="assessments" className="section" aria-labelledby="assessments-title">
         <div className="container">

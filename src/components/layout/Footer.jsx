@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom'
 import './Footer.css'
-import './Footer.css'
+import '../../styles/legal.css'
+
 export default function Footer() {
   return (
     <footer className="footer" id="privacy">
@@ -15,10 +17,14 @@ export default function Footer() {
         <div>
           <p className="footer__heading">Privacy</p>
           <p className="footer__note">
-            Nothing is collected yet. When we add saving of results, you will see
-            a full privacy notice and be asked for clear consent before any
-            personal information is stored.
+            You can use both assessments without an account. Your answers and
+            results stay in your browser. If you create an account, we store only
+            your email address and, if you choose, your name.
           </p>
+          <nav className="footer__links" aria-label="Legal">
+            <Link to="/privacy">Privacy Policy</Link>
+            <Link to="/terms">Terms and Conditions</Link>
+          </nav>
         </div>
       </div>
       <p className="container footer__legal">© {new Date().getFullYear()} Soft Compass</p>

@@ -6,7 +6,7 @@ import './Header.css'
 const links = [
   { to: '/#assessments', label: 'Assessments' },
   { to: '/#how-it-works', label: 'How it works' },
-  { to: '/#privacy', label: 'Privacy' },
+{ to: '/privacy', label: 'Privacy' },
   { to: '/#about', label: 'About' },
   { to: '/#contact', label: 'Contact' },
 ]

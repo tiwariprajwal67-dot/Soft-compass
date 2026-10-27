@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Add this line once you have your live address, for example:
-# Sitemap: https://soft-compass.vercel.app/sitemap.xml
+Sitemap: https://soft-compass.vercel.app/sitemap.xml

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import SceneBoundary from './SceneBoundary.jsx'
 import './Hero.css'
 
@@ -30,6 +30,15 @@ export default function Hero() {
   const [sceneLost, setSceneLost] = useState(false)
 
   const showScene = use3D && !sceneLost
+
+  // The flat circles are only a safety net. They stay hidden while the 3D scene loads,
+  // and appear only if it is taking unusually long (3 seconds), so they never flash.
+  const [slow, setSlow] = useState(false)
+  useEffect(() => {
+    if (!showScene || sceneReady) return undefined
+    const timer = setTimeout(() => setSlow(true), 3000)
+    return () => clearTimeout(timer)
+  }, [showScene, sceneReady])
 
   return (
     <section className="hero" id="top">
@@ -79,7 +88,7 @@ export default function Hero() {
           <div className="hero__halo" />
           <div className="hero__ground" />
 
-          <div className={`hero__flat ${showScene && sceneReady ? 'is-hidden' : ''}`}>
+          <div className={`hero__flat ${showScene && (sceneReady || !slow) ? 'is-hidden' : ''}`}>
             <div className="orbs">
               <span className="orb orb--sage" />
               <span className="orb orb--lavender" />
